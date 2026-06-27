@@ -63,7 +63,11 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Collections.singletonList("http://localhost:5173")); // Vite default dev server
+        configuration.setAllowedOrigins(Arrays.asList(
+            "http://localhost:5173",           // Vite dev server
+            "http://localhost:3000",           // alternate local dev
+            "https://taskmanager-tonj.onrender.com" // production backend (for same-origin API calls / Swagger)
+        ));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "Cache-Control", "Accept"));
         configuration.setExposedHeaders(Collections.singletonList("Authorization"));
